@@ -2,6 +2,9 @@
 
 namespace Shapes;
 
+include_once('src/ShapeInterface.php');
+include_once('src/ThreeDimensionalShapeInterface.php');
+
 class Calculator {
 
 	/**
@@ -12,7 +15,12 @@ class Calculator {
 	 */
 	public function surfaceArea(array $shapes)
 	{
-		return "undefined";
+		$totalSurfaceArea = 0;
+		foreach($shapes as $shape) {
+			if(!($shape instanceof ShapeInterface)) continue;
+			$totalSurfaceArea += $shape->area();
+		}
+		return $totalSurfaceArea;
 	}
 
 	/**
@@ -23,7 +31,12 @@ class Calculator {
 	 */
 	public function totalVolume(array $shapes)
 	{
-		return "undefined";
+		$totalVolume = 0;
+		foreach($shapes as $shape) {
+			if(!($shape instanceof ThreeDimensionalShapeInterface)) continue;
+			$totalVolume += $shape->volume();
+		}
+		return $totalVolume;
 	}
 
 }
